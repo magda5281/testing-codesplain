@@ -1,11 +1,10 @@
-import { render, screen } from "@testing-library/react";
-import RepositoriesSummary from "./RepositoriesSummary";
+import { render, screen } from '@testing-library/react';
+import RepositoriesSummary from './RepositoriesSummary';
 
-test("displays inforamation about the repository", () => {
-  
+test('displays information about the repository', () => {
   //sets up repository object
   const repository = {
-    language: "Javascript",
+    language: 'Javascript',
     stargazers_count: 5,
     forks: 30,
     open_issues: 1,
@@ -14,10 +13,10 @@ test("displays inforamation about the repository", () => {
   //renders component with prop of repository
   render(<RepositoriesSummary repository={repository} />);
 
- for (let key in repository) {
-  const value = repository[key]
-  const element = screen.getByText(new RegExp(value));
+  for (let key in repository) {
+    const value = repository[key];
+    const element = screen.getByText(new RegExp(value));
 
-  expect(element).toBeInTheDocument();
- }
+    expect(element).toBeInTheDocument();
+  }
 });
