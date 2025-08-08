@@ -99,7 +99,19 @@ routes.get('/api/repositories', async (req, res) => {
   }
 
   try {
-    const { data } = await axios.get(process.env.UPSTREAM_API + req.url);
+    const { q, per_page = 10 } = req.query;
+
+    const { data } = await axios.get(
+      process.env.UPSTREAM_API + '/search/repositories',
+      {
+        params: {
+          q, // e.g. "stars:>10000 language:ruby"
+          per_page,
+          sort: 'stars',
+          order: 'desc',
+        },
+      }
+    );
 
     await client.cachedResponse.create({
       data: {
